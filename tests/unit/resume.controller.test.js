@@ -1,16 +1,19 @@
+import { jest, describe, test, expect, beforeEach } from '@jest/globals';
+
+// Mock dependencies BEFORE importing controller
+jest.mock('../../models/resume.model.js');
+jest.mock('../../configs/imageKit.js');
+jest.mock('fs');
+
+// Then import
 import { createResume, deleteResume, getResumeById, getPublicResumeById, updateResume } from '../../controllers/resume.controller.js';
 import Resume from '../../models/resume.model.js';
 
-// Mock dependencies
-jest.mock('../../models/resume.model.js');
-jest.mock('../../configs/imageKit.js', () => ({
-    files: {
-        upload: jest.fn()
-    }
-}));
-jest.mock('fs', () => ({
-    createReadStream: jest.fn()
-}));
+// Set up mock methods for Resume
+Resume.create = jest.fn();
+Resume.findOne = jest.fn();
+Resume.findOneAndDelete = jest.fn();
+Resume.findOneAndUpdate = jest.fn();
 
 describe('Resume Controller - createResume', () => {
     let req, res;

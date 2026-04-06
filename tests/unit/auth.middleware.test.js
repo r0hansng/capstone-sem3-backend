@@ -1,7 +1,14 @@
+import { jest, describe, test, expect, beforeEach } from '@jest/globals';
+
+// Mock jwt BEFORE importing the middleware
+jest.mock('jsonwebtoken');
+
+// Then import
 import protect from '../../middleware/auth.middleware.js';
 import jwt from 'jsonwebtoken';
 
-jest.mock('jsonwebtoken');
+// Set up mock methods for jwt
+jwt.verify = jest.fn();
 
 describe('Auth Middleware - protect', () => {
     let req, res, next;

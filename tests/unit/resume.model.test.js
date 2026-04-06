@@ -1,15 +1,10 @@
+import { jest, describe, test, expect } from '@jest/globals';
+
+// Mock mongoose first
+jest.mock('mongoose');
+
+// Then import
 import Resume from '../../models/resume.model.js';
-
-// Mock mongoose
-jest.mock('mongoose', () => {
-    const mockSchema = jest.fn();
-    const mockModel = jest.fn();
-
-    return {
-        Schema: mockSchema,
-        model: mockModel,
-    };
-});
 
 describe('Resume Model Schema Validation', () => {
     test('Resume model should be defined', () => {

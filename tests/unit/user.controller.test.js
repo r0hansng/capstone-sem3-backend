@@ -1,13 +1,28 @@
+import { jest, describe, test, expect, beforeEach } from '@jest/globals';
+
+// Mock ALL dependencies BEFORE importing the controller
+jest.mock('../../models/user.model.js');
+jest.mock('../../models/resume.model.js');
+jest.mock('jsonwebtoken');
+jest.mock('bcrypt');
+
+// NOW import after mocking
 import { registerUser, loginUser, getUserById, getUserResumes } from '../../controllers/user.controller.js';
 import User from '../../models/user.model.js';
 import jwt from 'jsonwebtoken';
 import bcrypt from 'bcrypt';
 
-// Mock dependencies
-jest.mock('../../models/user.model.js');
-jest.mock('../../models/resume.model.js');
-jest.mock('jsonwebtoken');
-jest.mock('bcrypt');
+// Set up mock methods for User
+User.findOne = jest.fn();
+User.findById = jest.fn();
+User.create = jest.fn();
+
+// Set up mock methods for bcrypt
+bcrypt.hash = jest.fn();
+bcrypt.compareSync = jest.fn();
+
+// Set up mock methods for jwt
+jwt.sign = jest.fn();
 
 describe('User Controller - registerUser', () => {
     let req, res;

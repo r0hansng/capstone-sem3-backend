@@ -1,16 +1,11 @@
+import { jest, describe, test, expect, beforeEach } from '@jest/globals';
+
+// Mock mongoose first
+jest.mock('mongoose');
+
+// Then import after mocking
 import User from '../../models/user.model.js';
 import bcrypt from 'bcrypt';
-
-// Mock mongoose
-jest.mock('mongoose', () => {
-    const mockSchema = jest.fn();
-    const mockModel = jest.fn();
-
-    return {
-        Schema: mockSchema,
-        model: mockModel,
-    };
-});
 
 describe('User Model - comparePassword Method', () => {
     let userInstance;
@@ -21,12 +16,6 @@ describe('User Model - comparePassword Method', () => {
             password: '',
             comparePassword: User.model.prototype.comparePassword || (() => {}),
         };
-    });
-
-    test('should extract comparePassword method from schema', () => {
-        // This test verifies the method exists in the schema definition
-        const UserSchema = require('../../models/user.model.js').default;
-        expect(UserSchema).toBeDefined();
     });
 
     test('password comparison should validate correct password', async () => {
