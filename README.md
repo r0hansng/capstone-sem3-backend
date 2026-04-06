@@ -35,7 +35,7 @@ npm install
 3. You'll need to create a `.env` file in the server directory. Here's what it should look like:
 ```env
 PORT=5000
-MONGO_URI=your_mongodb_connection_string
+MONGODB_URI=your_mongodb_connection_string
 JWT_SECRET=your_jwt_secret_key
 IMAGEKIT_PUBLIC_KEY=your_imagekit_public_key
 IMAGEKIT_PRIVATE_KEY=your_imagekit_private_key
@@ -58,7 +58,17 @@ This will start the server with nodemon, so it'll automatically restart whenever
 npm start
 ```
 
-By default, the server runs on `http://localhost:5000` (unless you change the PORT in your .env file).
+By default, the server runs on `http://localhost:3000` (unless you change the PORT in your .env file).
+
+## API Documentation
+
+Interactive Swagger UI documentation is available at:
+
+- `/api-docs`
+
+You can also fetch the OpenAPI JSON at:
+
+- `/api-docs.json`
 
 ## Project Structure
 
@@ -161,12 +171,12 @@ You can use either a local MongoDB installation or MongoDB Atlas (cloud). Just a
 
 For local MongoDB:
 ```env
-MONGO_URI=mongodb://localhost:27017/resume-builder
+MONGODB_URI=mongodb://localhost:27017/resume-builder
 ```
 
 For MongoDB Atlas:
 ```env
-MONGO_URI=mongodb+srv://<username>:<password>@cluster.mongodb.net/<dbname>
+MONGODB_URI=mongodb+srv://<username>:<password>@cluster.mongodb.net/<dbname>
 ```
 
 ### JWT Secret Key

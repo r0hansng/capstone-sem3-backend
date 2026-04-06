@@ -95,7 +95,8 @@ export const updateResume = async (req, res) => {
                 }
             });
 
-            resumeDataCope.personal_info.image = response.url;
+            resumeDataCopy.personal_info = resumeDataCopy.personal_info || {};
+            resumeDataCopy.personal_info.image = response.url;
         }
 
         const resume = await Resume.findOneAndUpdate(

@@ -4,7 +4,7 @@ import bcrypt from 'bcrypt';
 import jwt from 'jsonwebtoken';
 
 const generateToken = (userId) => {
-    const token = jwt.sign({ id: userId }, process.env.JWT_SECRET, {
+    const token = jwt.sign({ userId }, process.env.JWT_SECRET, {
         expiresIn: '7d',
     });
     return token;
@@ -101,7 +101,7 @@ export const getUserResumes = async(req, res) => {
     try {
         const userId = req.userId;
 
-        const resumes = await Resume.find({ user: userId });
+        const resumes = await Resume.find({ userId: userId });
         
         return res.status(200).json({
             message: "Resumes retrieved successfully",

@@ -1,7 +1,9 @@
 import express from 'express';
 import cors from 'cors';
 import "dotenv/config";
+import swaggerUi from 'swagger-ui-express';
 import connectDB from './configs/db.js';
+import swaggerDocument, { swaggerUiOptions } from './configs/swagger.js';
 import userRouter from './routes/user.routes.js';
 import resumeRouter from './routes/resume.routes.js';
 import aiRouter from './routes/ai.routes.js';
@@ -14,6 +16,13 @@ await connectDB();
 
 app.use(cors());
 app.use(express.json());
+app.use(express.urlencoded({ extended: true }));
+
+app.use('/api-docs', swaggerUi.serve, swaggerUi.setup(swaggerDocument, swaggerUiOptions));
+
+app.get('/api-docs.json', (req, res) => {
+    res.json(swaggerDocument);
+});
 
 app.get('/', (req, res) => {
     res.send('Server is running');
