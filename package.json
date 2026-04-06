@@ -5,7 +5,10 @@
   "main": "server.js",
   "scripts": {
     "start": "node server.js",
-    "server": "nodemon server.js"
+    "server": "nodemon server.js",
+    "test": "jest --runInBand",
+    "test:watch": "jest --watch",
+    "test:coverage": "jest --coverage"
   },
   "keywords": [],
   "author": "",
@@ -24,6 +27,21 @@
     "swagger-ui-express": "^5.0.1"
   },
   "devDependencies": {
+    "jest": "^29.7.0",
+    "supertest": "^6.3.3",
     "nodemon": "^3.1.11"
+  },
+  "jest": {
+    "testEnvironment": "node",
+    "testMatch": ["**/tests/**/*.test.js"],
+    "collectCoverageFrom": [
+      "controllers/**/*.js",
+      "middleware/**/*.js",
+      "models/**/*.js",
+      "!**/node_modules/**"
+    ],
+    "coveragePathIgnorePatterns": ["/node_modules/"],
+    "transformIgnorePatterns": ["/node_modules/"],
+    "testTimeout": 10000
   }
 }
