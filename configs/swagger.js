@@ -1,201 +1,16 @@
 const swaggerUiOptions = {
     customSiteTitle: 'Resume Builder API Docs',
-    customCss: `
-        body {
-            margin: 0;
-            font-family: Inter, ui-sans-serif, system-ui, -apple-system, BlinkMacSystemFont, "Segoe UI", sans-serif;
-            background:
-                radial-gradient(circle at top left, rgba(59, 130, 246, 0.09), transparent 28%),
-                radial-gradient(circle at top right, rgba(168, 85, 247, 0.08), transparent 24%),
-                #f8fafc;
-        }
-
-        .swagger-ui .topbar {
-            background: linear-gradient(135deg, #0f172a 0%, #111827 45%, #1d4ed8 100%);
-            border-bottom: 1px solid rgba(255, 255, 255, 0.08);
-            box-shadow: 0 8px 24px rgba(15, 23, 42, 0.18);
-        }
-
-        .swagger-ui .topbar .wrapper {
-            padding: 14px 0;
-        }
-
-        .swagger-ui .topbar a {
-            color: #fff;
-        }
-
-        .swagger-ui .topbar .download-url-wrapper {
-            display: none;
-        }
-
-        .swagger-ui .info {
-            margin: 28px 0 20px;
-            background: rgba(255, 255, 255, 0.86);
-            border: 1px solid rgba(148, 163, 184, 0.22);
-            border-radius: 18px;
-            padding: 24px 28px;
-            box-shadow: 0 20px 60px rgba(15, 23, 42, 0.08);
-            backdrop-filter: blur(10px);
-        }
-
-        .swagger-ui .info .title {
-            color: #0f172a;
-            font-size: 2rem;
-            font-weight: 800;
-            letter-spacing: -0.03em;
-        }
-
-        .swagger-ui .info .description,
-        .swagger-ui .info p,
-        .swagger-ui .info li {
-            color: #475569;
-            line-height: 1.7;
-            font-size: 0.98rem;
-        }
-
-        .swagger-ui .scheme-container {
-            margin: 18px 0 28px;
-            padding: 22px 24px;
-            border-radius: 18px;
-            border: 1px solid rgba(148, 163, 184, 0.2);
-            background: rgba(255, 255, 255, 0.88);
-            box-shadow: 0 16px 40px rgba(15, 23, 42, 0.06);
-            backdrop-filter: blur(10px);
-        }
-
-        .swagger-ui .scheme-container .auth-wrapper {
-            background: transparent;
-        }
-
-        .swagger-ui .opblock {
-            margin: 0 0 16px;
-            border: 1px solid rgba(148, 163, 184, 0.18);
-            border-radius: 18px;
-            box-shadow: 0 14px 34px rgba(15, 23, 42, 0.05);
-            overflow: hidden;
-        }
-
-        .swagger-ui .opblock .opblock-summary {
-            padding: 14px 18px;
-        }
-
-        .swagger-ui .opblock-tag,
-        .swagger-ui .opblock .opblock-summary-description,
-        .swagger-ui .opblock .opblock-summary-path,
-        .swagger-ui .opblock .opblock-summary-method {
-            font-family: Inter, ui-sans-serif, system-ui, sans-serif;
-        }
-
-        .swagger-ui .opblock-tag {
-            color: #0f172a;
-            font-size: 1.05rem;
-            font-weight: 700;
-        }
-
-        .swagger-ui .opblock.opblock-post {
-            border-color: rgba(34, 197, 94, 0.24);
-            background: linear-gradient(180deg, rgba(240, 253, 244, 0.72), rgba(255, 255, 255, 0.96));
-        }
-
-        .swagger-ui .opblock.opblock-get {
-            border-color: rgba(59, 130, 246, 0.22);
-            background: linear-gradient(180deg, rgba(239, 246, 255, 0.72), rgba(255, 255, 255, 0.96));
-        }
-
-        .swagger-ui .opblock.opblock-put {
-            border-color: rgba(245, 158, 11, 0.22);
-            background: linear-gradient(180deg, rgba(255, 251, 235, 0.72), rgba(255, 255, 255, 0.96));
-        }
-
-        .swagger-ui .opblock.opblock-delete {
-            border-color: rgba(239, 68, 68, 0.2);
-            background: linear-gradient(180deg, rgba(254, 242, 242, 0.78), rgba(255, 255, 255, 0.96));
-        }
-
-        .swagger-ui .opblock .opblock-summary-method {
-            border-radius: 999px;
-            font-weight: 700;
-            letter-spacing: 0.04em;
-            text-transform: uppercase;
-        }
-
-        .swagger-ui .opblock .opblock-summary-path {
-            font-weight: 600;
-            color: #0f172a;
-        }
-
-        .swagger-ui .btn,
-        .swagger-ui .try-out__btn,
-        .swagger-ui .btn.execute,
-        .swagger-ui .authorize,
-        .swagger-ui .btn.authorize {
-            border-radius: 12px;
-            box-shadow: none;
-            transition: transform 0.18s ease, box-shadow 0.18s ease, background 0.18s ease;
-        }
-
-        .swagger-ui .btn:hover,
-        .swagger-ui .try-out__btn:hover,
-        .swagger-ui .btn.execute:hover,
-        .swagger-ui .authorize:hover,
-        .swagger-ui .btn.authorize:hover {
-            transform: translateY(-1px);
-            box-shadow: 0 10px 24px rgba(15, 23, 42, 0.12);
-        }
-
-        .swagger-ui .btn.authorize {
-            background: linear-gradient(135deg, #2563eb, #7c3aed);
-            color: #fff;
-            border: none;
-        }
-
-        .swagger-ui .btn.authorize svg {
-            fill: #fff;
-        }
-
-        .swagger-ui .execute-wrapper,
-        .swagger-ui .execute {
-            border-radius: 12px;
-        }
-
-        .swagger-ui .responses-wrapper,
-        .swagger-ui .responses-inner,
-        .swagger-ui .parameter__name,
-        .swagger-ui .parameter__type,
-        .swagger-ui table thead tr th,
-        .swagger-ui table tbody tr td {
-            font-family: Inter, ui-sans-serif, system-ui, sans-serif;
-        }
-
-        .swagger-ui .model-box,
-        .swagger-ui .model,
-        .swagger-ui .response,
-        .swagger-ui .parameters,
-        .swagger-ui .responses-wrapper {
-            border-radius: 16px;
-        }
-
-        .swagger-ui section.models {
-            border-radius: 18px;
-            overflow: hidden;
-            box-shadow: 0 14px 34px rgba(15, 23, 42, 0.05);
-        }
-
-        .swagger-ui .footer {
-            display: none;
-        }
-    `,
     swaggerOptions: {
         docExpansion: 'list',
         displayRequestDuration: true,
         filter: true,
         showCommonExtensions: true,
-        defaultModelsExpandDepth: -1,
-        defaultModelExpandDepth: 2,
+        defaultModelsExpandDepth: 1,
+        defaultModelExpandDepth: 1,
         persistAuthorization: true,
         syntaxHighlight: {
             activate: true,
-            theme: 'agate',
+            theme: 'github',
         },
     },
 };
@@ -234,6 +49,29 @@ const swaggerDocument = {
                     message: { type: 'string', example: 'Unauthorized' },
                 },
             },
+            HealthResponse: {
+                type: 'object',
+                properties: {
+                    message: { type: 'string', example: 'Server is running' },
+                },
+            },
+            RegisterUserRequest: {
+                type: 'object',
+                required: ['name', 'email', 'password'],
+                properties: {
+                    name: { type: 'string', example: 'Aarav Sharma' },
+                    email: { type: 'string', example: 'aarav@example.com' },
+                    password: { type: 'string', example: 'Password@123' },
+                },
+            },
+            LoginUserRequest: {
+                type: 'object',
+                required: ['email', 'password'],
+                properties: {
+                    email: { type: 'string', example: 'aarav@example.com' },
+                    password: { type: 'string', example: 'Password@123' },
+                },
+            },
             User: {
                 type: 'object',
                 properties: {
@@ -242,6 +80,13 @@ const swaggerDocument = {
                     email: { type: 'string', example: 'aarav@example.com' },
                     createdAt: { type: 'string', format: 'date-time' },
                     updatedAt: { type: 'string', format: 'date-time' },
+                },
+            },
+            UserResponse: {
+                type: 'object',
+                properties: {
+                    message: { type: 'string', example: 'User retrieved successfully' },
+                    user: { $ref: '#/components/schemas/User' },
                 },
             },
             AuthResponse: {
@@ -336,10 +181,66 @@ const swaggerDocument = {
                     title: { type: 'string', example: 'Frontend Developer Resume' },
                 },
             },
+            ResumeCreateRequest: {
+                type: 'object',
+                required: ['title'],
+                properties: {
+                    title: { type: 'string', example: 'Frontend Developer Resume' },
+                },
+            },
+            ResumeUpdateRequest: {
+                type: 'object',
+                required: ['resumeId', 'resumeData'],
+                properties: {
+                    resumeId: { type: 'string', example: '665f1c7f1f2b4b2d2c1a5678' },
+                    resumeData: {
+                        type: 'string',
+                        description: 'Stringified resume JSON object',
+                        example: '{"title":"Updated Resume","personal_info":{"full_name":"Aarav Sharma"}}',
+                    },
+                    removeBackground: { type: 'boolean', example: false },
+                    image: { type: 'string', format: 'binary' },
+                },
+            },
             CreateResumeResponse: {
                 type: 'object',
                 properties: {
                     message: { type: 'string', example: 'Resume created successfully' },
+                    resume: { $ref: '#/components/schemas/Resume' },
+                },
+            },
+            ResumeUpdateResponse: {
+                type: 'object',
+                properties: {
+                    message: { type: 'string', example: 'Resume updated successfully' },
+                    resume: { $ref: '#/components/schemas/Resume' },
+                },
+            },
+            ResumeDeleteResponse: {
+                type: 'object',
+                properties: {
+                    message: { type: 'string', example: 'Resume deleted successfully' },
+                },
+            },
+            UserResumesResponse: {
+                type: 'object',
+                properties: {
+                    message: { type: 'string', example: 'Resumes retrieved successfully' },
+                    resumes: {
+                        type: 'array',
+                        items: { $ref: '#/components/schemas/Resume' },
+                    },
+                },
+            },
+            ResumeDetailResponse: {
+                type: 'object',
+                properties: {
+                    resume: { $ref: '#/components/schemas/Resume' },
+                },
+            },
+            PublicResumeResponse: {
+                type: 'object',
+                properties: {
                     resume: { $ref: '#/components/schemas/Resume' },
                 },
             },
@@ -379,6 +280,15 @@ const swaggerDocument = {
                     resumeId: { type: 'string', example: '665f1c7f1f2b4b2d2c1a5678' },
                 },
             },
+            AIResponse: {
+                type: 'object',
+                properties: {
+                    enhancedContent: {
+                        type: 'string',
+                        example: 'Results-driven software engineer with expertise in ...',
+                    },
+                },
+            },
         },
     },
     paths: {
@@ -391,7 +301,7 @@ const swaggerDocument = {
                         description: 'Server is running',
                         content: {
                             'text/plain': {
-                                schema: { type: 'string', example: 'Server is running' },
+                                schema: { $ref: '#/components/schemas/HealthResponse' },
                             },
                         },
                     },
@@ -406,15 +316,7 @@ const swaggerDocument = {
                     required: true,
                     content: {
                         'application/json': {
-                            schema: {
-                                type: 'object',
-                                required: ['name', 'email', 'password'],
-                                properties: {
-                                    name: { type: 'string', example: 'Aarav Sharma' },
-                                    email: { type: 'string', example: 'aarav@example.com' },
-                                    password: { type: 'string', example: 'Password@123' },
-                                },
-                            },
+                            schema: { $ref: '#/components/schemas/RegisterUserRequest' },
                         },
                     },
                 },
@@ -446,14 +348,7 @@ const swaggerDocument = {
                     required: true,
                     content: {
                         'application/json': {
-                            schema: {
-                                type: 'object',
-                                required: ['email', 'password'],
-                                properties: {
-                                    email: { type: 'string', example: 'aarav@example.com' },
-                                    password: { type: 'string', example: 'Password@123' },
-                                },
-                            },
+                            schema: { $ref: '#/components/schemas/LoginUserRequest' },
                         },
                     },
                 },
@@ -487,13 +382,7 @@ const swaggerDocument = {
                         description: 'User retrieved successfully',
                         content: {
                             'application/json': {
-                                schema: {
-                                    type: 'object',
-                                    properties: {
-                                        message: { type: 'string', example: 'User retrieved successfully' },
-                                        user: { $ref: '#/components/schemas/User' },
-                                    },
-                                },
+                                schema: { $ref: '#/components/schemas/UserResponse' },
                             },
                         },
                     },
@@ -526,16 +415,7 @@ const swaggerDocument = {
                         description: 'Resumes retrieved successfully',
                         content: {
                             'application/json': {
-                                schema: {
-                                    type: 'object',
-                                    properties: {
-                                        message: { type: 'string', example: 'Resumes retrieved successfully' },
-                                        resumes: {
-                                            type: 'array',
-                                            items: { $ref: '#/components/schemas/Resume' },
-                                        },
-                                    },
-                                },
+                                schema: { $ref: '#/components/schemas/UserResumesResponse' },
                             },
                         },
                     },
@@ -559,7 +439,7 @@ const swaggerDocument = {
                     required: true,
                     content: {
                         'application/json': {
-                            schema: { $ref: '#/components/schemas/ResumeTitleRequest' },
+                            schema: { $ref: '#/components/schemas/ResumeCreateRequest' },
                         },
                     },
                 },
@@ -593,20 +473,7 @@ const swaggerDocument = {
                     required: true,
                     content: {
                         'multipart/form-data': {
-                            schema: {
-                                type: 'object',
-                                required: ['resumeId', 'resumeData'],
-                                properties: {
-                                    resumeId: { type: 'string', example: '665f1c7f1f2b4b2d2c1a5678' },
-                                    resumeData: {
-                                        type: 'string',
-                                        description: 'Stringified resume JSON object',
-                                        example: '{"title":"Updated Resume","personal_info":{"full_name":"Aarav Sharma"}}',
-                                    },
-                                    removeBackground: { type: 'boolean', example: false },
-                                    image: { type: 'string', format: 'binary' },
-                                },
-                            },
+                            schema: { $ref: '#/components/schemas/ResumeUpdateRequest' },
                         },
                     },
                 },
@@ -615,13 +482,7 @@ const swaggerDocument = {
                         description: 'Resume updated successfully',
                         content: {
                             'application/json': {
-                                schema: {
-                                    type: 'object',
-                                    properties: {
-                                        message: { type: 'string', example: 'Resume updated successfully' },
-                                        resume: { $ref: '#/components/schemas/Resume' },
-                                    },
-                                },
+                                schema: { $ref: '#/components/schemas/ResumeUpdateResponse' },
                             },
                         },
                     },
@@ -663,12 +524,7 @@ const swaggerDocument = {
                         description: 'Resume deleted successfully',
                         content: {
                             'application/json': {
-                                schema: {
-                                    type: 'object',
-                                    properties: {
-                                        message: { type: 'string', example: 'Resume deleted successfully' },
-                                    },
-                                },
+                                schema: { $ref: '#/components/schemas/ResumeDeleteResponse' },
                             },
                         },
                     },
@@ -710,12 +566,7 @@ const swaggerDocument = {
                         description: 'Resume retrieved successfully',
                         content: {
                             'application/json': {
-                                schema: {
-                                    type: 'object',
-                                    properties: {
-                                        resume: { $ref: '#/components/schemas/Resume' },
-                                    },
-                                },
+                                schema: { $ref: '#/components/schemas/ResumeDetailResponse' },
                             },
                         },
                     },
@@ -756,12 +607,7 @@ const swaggerDocument = {
                         description: 'Public resume retrieved successfully',
                         content: {
                             'application/json': {
-                                schema: {
-                                    type: 'object',
-                                    properties: {
-                                        resume: { $ref: '#/components/schemas/Resume' },
-                                    },
-                                },
+                                schema: { $ref: '#/components/schemas/PublicResumeResponse' },
                             },
                         },
                     },
@@ -794,7 +640,7 @@ const swaggerDocument = {
                         description: 'Summary enhanced successfully',
                         content: {
                             'application/json': {
-                                schema: { $ref: '#/components/schemas/EnhancedContentResponse' },
+                                schema: { $ref: '#/components/schemas/AIResponse' },
                             },
                         },
                     },
@@ -827,7 +673,7 @@ const swaggerDocument = {
                         description: 'Job description enhanced successfully',
                         content: {
                             'application/json': {
-                                schema: { $ref: '#/components/schemas/EnhancedContentResponse' },
+                                schema: { $ref: '#/components/schemas/AIResponse' },
                             },
                         },
                     },
